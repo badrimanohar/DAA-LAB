@@ -1,0 +1,8 @@
+def fibanoic(n):
+    if n==1
+       return 1
+     else:
+       return fibanoic(n-1)+fibanoic(n-2)
+terms=10
+for i in range(terms)
+     print(fibanoic(i))
