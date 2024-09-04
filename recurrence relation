@@ -1,0 +1,25 @@
+def master_theorem(a, b, k):
+    if a < 1 or b < 1:
+        raise ValueError("a and b must be greater than 0")
+    if k < 0:
+        raise ValueError("k must be non-negative")
+    n = 1
+    while True:
+        if n**k > a * (n/b)**k:
+            return f'Time complexity is O(n^{k})'
+        n += 1
+def substitution_method(n):
+    if n == 1:
+        return 1
+    else:
+        return substitution_method(n // 2) + n
+def iteration_method(n):
+    total = 0
+    while n > 1:
+        total += n
+        n //= 2
+    return total + 1
+if __name__ == "__main__":
+    print("Master Theorem Result:", master_theorem(2, 2, 1))
+    print("Substitution Method Result:", substitution_method(8))
+    print("Iteration Method Result:", iteration_method(8))
