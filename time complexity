@@ -1,0 +1,25 @@
+import time
+def example_algorithm_1(n):
+    total = 0
+    for i in range(n):
+        for j in range(n):
+            total += i * j
+    return total
+def example_algorithm_2(n):
+    total = 0
+    for i in range(n):
+        total += i
+    return total
+def analyze_time_complexity(algorithm, n):
+    start_time = time.time()
+    algorithm(n)
+    end_time = time.time()
+    return end_time - start_time
+n_values = [100, 200, 300, 400, 500]
+print("Time Complexity Analysis:")
+print(f"{'Algorithm':<25}{'Input Size':<15}{'Time (seconds)':<15}")
+for n in n_values:
+    time_1 = analyze_time_complexity(example_algorithm_1, n)
+    time_2 = analyze_time_complexity(example_algorithm_2, n)
+    print(f"{'Algorithm 1':<25}{n:<15}{time_1:<15}")
+    print(f"{'Algorithm 2':<25}{n:<15}{time_2:<15}")
