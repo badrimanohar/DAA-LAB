@@ -1,0 +1,28 @@
+def smallestStringWithSwaps(s: str, pairs: list) -> str:
+    from collections import defaultdict
+    graph = defaultdict(list)
+    for a, b in pairs:
+        graph[a].append(b)
+        graph[b].append(a)
+    visited = [False] * len(s)
+    result = list(s)
+    def dfs(node, indices, characters):
+        visited[node] = True
+        indices.append(node)
+        characters.append(s[node])
+        for neighbor in graph[node]:
+            if not visited[neighbor]:
+                dfs(neighbor, indices, characters)
+    for i in range(len(s)):
+        if not visited[i]:
+            indices = []
+            characters = []
+            dfs(i, indices, characters)
+            indices.sort()
+            characters.sort()
+            for idx, char in zip(indices, characters):
+                result[idx] = char
+    return ''.join(result)
+s = "dcab"
+pairs = [[0, 3], [1, 2]]
+print(smallestStringWithSwaps(s, pairs)) 
