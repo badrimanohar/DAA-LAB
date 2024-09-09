@@ -1,0 +1,16 @@
+def minimize_cost(s: str) -> str:
+    result = []
+    char_count = {}
+    for char in s:
+        if char == '?':
+            min_char = min((c for c in 'abcdefghijklmnopqrstuvwxyz' if c not in char_count), 
+                           key=lambda x: char_count.get(x, 0), default='a')
+            result.append(min_char)
+            char_count[min_char] = char_count.get(min_char, 0) + 1
+        else:
+            result.append(char)
+            char_count[char] = char_count.get(char, 0) + 1
+    return ''.join(result)
+s = "a?b?c??"
+minimized_string = minimize_cost(s)
+print(minimized_string)
