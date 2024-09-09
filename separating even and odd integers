@@ -1,0 +1,13 @@
+def separate_odd_even(nums):
+    odd_numbers = []
+    even_numbers = []    
+    for num in nums:
+        if num % 2 == 0:
+            even_numbers.append(num)
+        else:
+            odd_numbers.append(num)
+    return odd_numbers, even_numbers
+nums = [1, 2, 3, 4, 5, 6]
+odds, evens = separate_odd_even(nums)
+print("Odd Numbers:", odds)
+print("Even Numbers:", evens)
