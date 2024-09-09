@@ -1,0 +1,12 @@
+def reduce_string(s: str) -> str:
+    while s:
+        for char in range(ord('a'), ord('z') + 1):
+            char = chr(char)
+            if char in s:
+                s = s.replace(char, '', 1)
+        if not s:  # Check if the string is empty after the operation
+            break
+    return s
+input_string = "aabcbbca"
+result = reduce_string(input_string)
+print(f"Resulting string before last operation: '{result}'")
