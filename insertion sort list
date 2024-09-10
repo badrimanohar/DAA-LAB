@@ -1,0 +1,27 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+def insertionSortList(head):
+    if not head:
+        return None
+    sorted_head = ListNode(0) 
+    current = head
+    while current:
+        prev = sorted_head
+        next_node = current.next
+        while prev.next and prev.next.val < current.val:
+            prev = prev.next
+        current.next = prev.next
+        prev.next = current
+        current = next_node
+    return sorted_head.next
+def print_list(head):
+    current = head
+    while current:
+        print(current.val, end=" -> ")
+        current = current.next
+    print("None")
+head = ListNode(4, ListNode(2, ListNode(1, ListNode(3))))
+sorted_head = insertionSortList(head)
+print_list(sorted_head)
