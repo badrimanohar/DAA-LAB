@@ -1,0 +1,33 @@
+def meet_in_middle(arr, target):
+    n = len(arr)
+    mid = n // 2
+    left_part = []
+    right_part = []
+    for i in range(1 << mid):
+        sum_left = 0
+        for j in range(mid):
+            if i & (1 << j):
+                sum_left += arr[j]
+        left_part.append(sum_left)
+    for i in range(1 << (n - mid)):
+        sum_right = 0
+        for j in range(n - mid):
+            if i & (1 << j):
+                sum_right += arr[mid + j]
+        right_part.append(sum_right)
+    right_part.sort()
+    count = 0
+    for sum_left in left_part:
+        low, high = 0, len(right_part) - 1
+        while low <= high:
+            mid = (low + high) // 2
+            if sum_left + right_part[mid] < target:
+                low = mid + 1
+            else:
+                high = mid - 1
+        count += low
+    return count
+arr = [1, 2, 3, 4, 5]
+target = 5
+result = meet_in_middle(arr, target)
+print(f"Number of subsets with sum less than {target}: {result}")
