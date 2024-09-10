@@ -1,0 +1,15 @@
+def diagonalSort(mat):
+    from collections import defaultdict
+    diagonals = defaultdict(list)
+    for i in range(len(mat)):
+        for j in range(len(mat[0])):
+            diagonals[i - j].append(mat[i][j])
+    for key in diagonals:
+        diagonals[key].sort()
+    for i in range(len(mat)):
+        for j in range(len(mat[0])):
+            mat[i][j] = diagonals[i - j].pop(0)
+    return mat
+mat = [[3,3,1,1],[2,2,1,2],[1,1,1,2]]
+sorted_mat = diagonalSort(mat)
+print(sorted_mat)
