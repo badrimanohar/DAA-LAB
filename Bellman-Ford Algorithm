@@ -1,0 +1,29 @@
+def catMouseGame(graph):
+    n = len(graph)
+    dp = [[[0] * n for _ in range(n)] for _ in range(2 * n)]
+    for turn in range(2 * n - 1, -1, -1):
+        for mouse in range(n):
+            for cat in range(n):
+                if mouse == cat:
+                    dp[turn][mouse][cat] = 2  
+                elif mouse == 0:
+                    dp[turn][mouse][cat] = 1  
+                elif turn % 2 == 0: 
+                    dp[turn][mouse][cat] = 2  
+                    for next_mouse in graph[mouse]:
+                        if dp[turn + 1][next_mouse][cat] == 1:
+                            dp[turn][mouse][cat] = 1 
+                            break
+                else:  
+                    dp[turn][mouse][cat] = 1 
+                    for next_cat in graph[cat]:
+                        if next_cat != 0 and dp[turn + 1][mouse][next_cat] == 2:
+                            dp[turn][mouse][cat] = 2  
+                            break
+
+    return dp[0][1][2]
+
+
+graph = [[2,5],[3],[0,4,5],[1,4,5],[2,3],[0,2,3]]
+output = catMouseGame(graph)
+print(output)  
