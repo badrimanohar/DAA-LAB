@@ -1,0 +1,10 @@
+import math
+import heapq
+def kClosest(points, k):
+    def distance(point):
+        return math.sqrt(point[0]**2 + point[1]**2)
+    return heapq.nsmallest(k, points, key=distance)
+points = [[1, 3], [-2, 2], [5, 8], [0, 1]]
+k = 2
+result = kClosest(points, k)
+print(result) 
