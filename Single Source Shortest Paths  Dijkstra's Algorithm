@@ -1,0 +1,39 @@
+import sys
+def dijkstra(graph, source):
+    n = len(graph)
+    dist = [sys.maxsize] * n
+    dist[source] = 0
+    visited = [False] * n
+    for _ in range(n):
+        min_dist = sys.maxsize
+        u = -1
+        for v in range(n):
+            if not visited[v] and dist[v] < min_dist:
+                min_dist = dist[v]
+                u = v
+        visited[u] = True
+        for v in range(n):
+            if graph[u][v] != sys.maxsize and not visited[v]:
+                dist[v] = min(dist[v], dist[u] + graph[u][v])
+    return dist
+n = 5
+graph = [[0, 10, 3, sys.maxsize, sys.maxsize],
+         [sys.maxsize, 0, 1, 2, sys.maxsize],
+         [sys.maxsize, 4, 0, 8, 2],
+         [sys.maxsize, sys.maxsize, sys.maxsize, 0, 7],
+         [sys.maxsize, sys.maxsize, sys.maxsize, 9, 0]]
+source = 0
+print(dijkstra(graph, source))
+from collections import Counter
+def count_tuples(A, B, C, D):
+    count = 0
+    AB_sum = Counter(a + b for a in A for b in B)    
+    for c in C:
+        for d in D:
+            count += AB_sum[-(c + d)]
+    return count
+A = [1, 2]
+B = [-2, -1]
+C = [-1, 2]
+D = [0, 2]
+print(count_tuples(A, B, C, D))
